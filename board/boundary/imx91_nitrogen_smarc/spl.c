@@ -37,6 +37,7 @@
 #include <asm/arch/trdc.h>
 
 #define CS0_BNDS_1GB	0x8000bf
+#define CS0_BNDS_512MB	0x80009f
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -78,6 +79,7 @@ void spl_dram_init(void)
 	printf("DDR: %uMTS", ptiming->fsp_msg[0].drate);
 	ddr_init(ptiming);
 
+#ifndef CONFIG_IMX91_NITROGEN_SMARC_512
 	dram_size = get_ram_size((long int *)CFG_SYS_SDRAM_BASE, SZ_2G);
 	printf("\tSize: ");
 	print_size(dram_size, "\n");
@@ -91,6 +93,12 @@ void spl_dram_init(void)
 			printf("Warning: This board is not 2GiB or 1GiB !!!\n");
 		}
 	}
+#else
+	printf(" Config: DDR 512 MB\n");
+	dram_size = get_ram_size((long int *)CFG_SYS_SDRAM_BASE, SZ_512M);
+	printf("\tSize: ");
+	print_size(dram_size, "\n");
+#endif
 }
 
 #if CONFIG_IS_ENABLED(DM_PMIC_PCA9450)
