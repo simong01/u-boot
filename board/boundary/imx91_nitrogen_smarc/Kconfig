@@ -22,5 +22,10 @@ config IMX91_NITROGEN_SMARC_LPDDR4
 
 endchoice
 
+config IMX91_NITROGEN_SMARC_512
+	bool "512 MB DRAM"
+	help
+	  Select for 512 MB DRAM
+
 source "board/boundary/common/Kconfig"
 endif

@@ -1,0 +1,3 @@
+#include <configs/imx91_nitrogen_smarc_defconfig>
+
+CONFIG_IMX91_NITROGEN_SMARC_512=y

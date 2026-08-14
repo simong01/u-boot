@@ -81,6 +81,7 @@ void spl_dram_init(void)
 	dram_size = get_ram_size((long int *)CFG_SYS_SDRAM_BASE, SZ_2G);
 	printf("\tSize: ");
 	print_size(dram_size, "\n");
+#ifndef CONFIG_IMX91_NITROGEN_SMARC_512
 	/* Is this a 2G board or less ? */
 	if (dram_size != SZ_2G) {
 		if (dram_size == SZ_1G) {
@@ -91,6 +92,9 @@ void spl_dram_init(void)
 			printf("Warning: This board is not 2GiB or 1GiB !!!\n");
 		}
 	}
+#else
+	printf("Config: DDR 512 MB\n");
+#endif
 }
 
 #if CONFIG_IS_ENABLED(DM_PMIC_PCA9450)
